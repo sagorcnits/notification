@@ -17,7 +17,7 @@ const Login = () => {
     // console.log(userData);
     // post user
     axios
-      .get(`http://localhost:5000/users?email=${email}&password=${password}`)
+      .get(`http://localhost:3000/users?email=${email}&password=${password}`)
       .then((res) => {
         if (res.data.length > 0) {
             localStorage.setItem("user", JSON.stringify(res.data[0]))

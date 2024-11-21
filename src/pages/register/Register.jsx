@@ -11,7 +11,7 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    const userData = { name, email, password };
+    const userData = { name, email, password, role:"user" };
     console.log(userData);
     // post user
     axios

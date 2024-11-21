@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Admin = () => {
   return (
@@ -11,18 +12,32 @@ const Admin = () => {
 export default Admin;
 
 const App = () => {
-  const [users, setUsers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com" },
-    { id: 3, name: "Mark Wilson", email: "mark@example.com" },
-  ]);
+  const [users, setUsers] = useState([]);
 
-  const sendNotification = (user) => {
-    alert(`Notification sent to ${user.name}`);
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users")
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  const sendToAll = () => {
-    alert("Notification sent to all users!");
+  // send all anoucment
+  const sendAnnouncement = async () => {
+    const title = "Announcement"; // Notification title
+    const message = "This is a global announcement!";
+
+    axios
+      .get("http://localhost:3000/send-notification")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -41,15 +56,12 @@ const App = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id} className="hover:bg-gray-50">
+            <tr key={index} className="hover:bg-gray-50">
               <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
               <td className="border border-gray-300 px-4 py-2">{user.name}</td>
               <td className="border border-gray-300 px-4 py-2">{user.email}</td>
               <td className="border border-gray-300 px-4 py-2 text-center">
-                <button
-                  onClick={() => sendNotification(user)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                >
+                <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
                   Notify
                 </button>
               </td>
@@ -58,7 +70,7 @@ const App = () => {
         </tbody>
       </table>
       <button
-        onClick={sendToAll}
+        onClick={() => sendAnnouncement()}
         className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
       >
         Notify All

@@ -1,9 +1,7 @@
-self.addEventListener('push', event => {
-    const data = event.data.json();
-    console.log('Push Received:', data);
-
-    self.registration.showNotification(data.title, {
-        body: data.body,
-        icon: '/icon.png', // Optional icon
-    });
+self.addEventListener("push", (e) => {
+  const data = e.data.json();
+  console.log(data)
+  self.registration.showNotification(data.title, {
+    body: data.title
+  });
 });
