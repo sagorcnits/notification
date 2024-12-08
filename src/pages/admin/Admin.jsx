@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users")
+      .get("http://localhost:3000/users")
       .then((res) => {
         setUsers(res.data);
       })
@@ -27,11 +27,11 @@ const App = () => {
 
   // send all anoucment
   const sendAnnouncement = async () => {
-    const title = "Announcement"; // Notification title
-    const message = "This is a global announcement!";
+    const title = "softeins lab"; // Notification title
+    const message = "50% discount next batch";
 
     axios
-      .get("http://localhost:3000/send-notification")
+      .post("http://localhost:3000/send-notification", {title, message})
       .then((res) => {
         console.log(res.data);
       })

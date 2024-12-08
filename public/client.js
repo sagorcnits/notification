@@ -12,10 +12,12 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 async function send() {
+  console.log("register ok")
   // register server worker
-  const register = await navigator.serviceWorker.register("sw.js");
+  const register = await navigator.serviceWorker.register("/sw.js");
+const serviceWorkerReady = await navigator.serviceWorker.ready;
   // register psush
-  const subscription = await register.pushManager.subscribe({
+  const subscription = await serviceWorkerReady.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(
       "BOl20j8f24gMPqTHi9W1MLlxk5Q-Wrfs-r5KL8wcEch0dNCL4HVi_mnja5RnVsmBfuGYXnX6FrlVD0Hocvus3qU"
@@ -34,7 +36,4 @@ async function send() {
 
 export default send;
 
-//   document.getElementById("notifyBtn").addEventListener("click", () => {
-//     if ("serviceWorker" in navigator) {
-//     }
-//   });
+

@@ -2,17 +2,19 @@ import { useEffect } from "react";
 import send from "../../../public/client";
 
 const Home = () => {
-  // if ("Notification" in window) {
-  //   Notification.requestPermission().then((permission) => {
-  //     if (permission === "garanted") {
-  //       alert("Notification permission garanted!");
-  //     }
-  //   });
-  // }
+  // const [permission,setPermission] = useState(false)
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      send().catch((err) => console.log(err));
+    if ("Notification" in window && 'serviceWorker' in navigator) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          // setPermission(true)
+          console.log("Notification permission garanted!");
+          if ("serviceWorker" in navigator) {
+            send().catch((err) => console.log(err));
+          }
+        }
+      });
     }
   }, []);
 
