@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layout/Root";
 import Admin from "../pages/admin/Admin";
+import Exam from "../pages/exam/Exam";
 import Form from "../pages/form/Form";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
@@ -23,6 +24,10 @@ const router = createBrowserRouter(
         {
           path: "/form",
           element: <Form></Form>,
+        },
+        {
+          path: "/exam",
+          element: <Exam></Exam>,
         },
       ],
     },

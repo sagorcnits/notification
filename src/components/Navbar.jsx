@@ -1,4 +1,4 @@
-import React from "react";
+
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -22,6 +22,22 @@ const Navbar = () => {
           }
         >
           <li>Home</li>
+        </NavLink>
+        <NavLink
+          to="/form"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+        >
+          <li>Form</li>
+        </NavLink>
+        <NavLink
+          to="/exam"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+        >
+          <li>Exam</li>
         </NavLink>
         {user?.role === "admin" && (
           <NavLink
